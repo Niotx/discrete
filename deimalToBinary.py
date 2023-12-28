@@ -67,8 +67,6 @@ def add(arr1, arr2):
                 if len(arr2) == j+1:
                     addarr.append(1)
                     newadd.append(2 ** (j + 1))
-        print('aad: ', addarr, newadd)
-        print('aad IRL: ', addarr[::-1], newadd[::-1])
     elif len(arr1) < len(arr2):
         num = len(arr2) - len(arr1)
         for i in range(num):
@@ -97,20 +95,34 @@ def add(arr1, arr2):
                 if len(arr2) == j+1:
                     addarr.append(1)
                     newadd.append(2 ** (j + 1))
-        print('aad: ', addarr, newadd)
-        print('aad IRL: ', addarr[::-1], newadd[::-1])
     else:
-        print('same')
         pass
     return addarr
+
+
+def multiplier(arr1, arr2):
+    multi = []
+    suma = []
+    for i in arr2:
+        for h in range(i):
+            multi.append(0)
+        for j in arr1:
+            multi.append(j * i)
+        suma = add(suma, multi)
+        multi = []
+    return suma
 
 
 firstInp = int(input("Enter first decimal number : "))
 secondInp = int(input("Enter second decimal number : "))
 firstInp = binary(firstInp)
 secondInp = binary(secondInp)
+print('F:', firstInp, 'F:', secondInp)
 firstInp = cut(firstInp)
 secondInp = cut(secondInp)
-comp = add(firstInp,secondInp)
-print(firstInp, secondInp)
+addition = add(firstInp, secondInp)
+print('Sum', addition)
+mul = multiplier(firstInp, secondInp)
+print('mul:', mul)
+
 

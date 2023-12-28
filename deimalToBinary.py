@@ -67,11 +67,12 @@ def add(arr1, arr2):
                 if len(arr2) == j+1:
                     addarr.append(1)
                     newadd.append(2 ** (j + 1))
+        # print('aad: ', newadd)
+        # print('aad IRL: ', newadd[::-1])
     elif len(arr1) < len(arr2):
         num = len(arr2) - len(arr1)
         for i in range(num):
             arr1.append(0)
-            print(arr1)
         for j in range(len(arr2)):
             if (arr1[j] + arr2[j] + carry) == 1:
                 carry = 0
@@ -95,8 +96,37 @@ def add(arr1, arr2):
                 if len(arr2) == j+1:
                     addarr.append(1)
                     newadd.append(2 ** (j + 1))
+        # print('aad: ', newadd)
+        # print('aad IRL: ', newadd[::-1])
     else:
-        pass
+        num = len(arr2) - len(arr1)
+        for i in range(num):
+            arr1.append(0)
+        for j in range(len(arr2)):
+            if (arr1[j] + arr2[j] + carry) == 1:
+                carry = 0
+                addarr.append(1)
+                newadd.append(2 ** j)
+            elif (arr1[j] + arr2[j] + carry) == 2:
+                carry = 1
+                addarr.append(0)
+                newadd.append(0)
+                if len(arr2) == j + 1:
+                    addarr.append(1)
+                    newadd.append(2 ** (j + 1))
+            elif (arr1[j] + arr2[j] + carry) == 0:
+                carry = 0
+                addarr.append(0)
+                newadd.append(0)
+            elif (arr1[j] + arr2[j] + carry) == 3:
+                carry = 1
+                addarr.append(1)
+                newadd.append(2 ** j)
+                if len(arr2) == j+1:
+                    addarr.append(1)
+                    newadd.append(2 ** (j + 1))
+        # print('aad: ', newadd)
+        # print('aad IRL: ', newadd[::-1])
     return addarr
 
 
@@ -115,14 +145,16 @@ def multiplier(arr1, arr2):
 
 firstInp = int(input("Enter first decimal number : "))
 secondInp = int(input("Enter second decimal number : "))
+num1 = firstInp
+num2 = secondInp
 firstInp = binary(firstInp)
 secondInp = binary(secondInp)
-print('F:', firstInp, 'F:', secondInp)
+print('F:', firstInp, '\nF:', secondInp)
 firstInp = cut(firstInp)
 secondInp = cut(secondInp)
 addition = add(firstInp, secondInp)
-print('Sum', addition)
+print(f'SUM: {num1+num2}=>', ':', addition[::-1])
 mul = multiplier(firstInp, secondInp)
-print('mul:', mul)
+print(f'MUL: {num1*num2}=>', mul[::-1])
 
 

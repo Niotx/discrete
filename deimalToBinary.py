@@ -133,28 +133,31 @@ def add(arr1, arr2):
 def multiplier(arr1, arr2):
     multi = []
     suma = []
+    counter = 0
     for i in arr2:
-        for h in range(i):
+        for h in range(counter):
             multi.append(0)
         for j in arr1:
             multi.append(j * i)
         suma = add(suma, multi)
         multi = []
-    return suma
+        counter += 1
+    return cut(suma)
 
 
-firstInp = int(input("Enter first decimal number : "))
-secondInp = int(input("Enter second decimal number : "))
-num1 = firstInp
-num2 = secondInp
-firstInp = binary(firstInp)
-secondInp = binary(secondInp)
-print('F:', firstInp, '\nF:', secondInp)
-firstInp = cut(firstInp)
-secondInp = cut(secondInp)
-addition = add(firstInp, secondInp)
-print(f'SUM: {num1+num2}=>', ':', addition[::-1])
-mul = multiplier(firstInp, secondInp)
-print(f'MUL: {num1*num2}=>', mul[::-1])
+while True:
+    firstInp = int(input("Enter first decimal number : "))
+    secondInp = int(input("Enter second decimal number : "))
+    num1 = firstInp
+    num2 = secondInp
+    firstInp = binary(firstInp)
+    secondInp = binary(secondInp)
+    print('F:', firstInp, '\nF:', secondInp)
+    firstInp = cut(firstInp)
+    secondInp = cut(secondInp)
+    addition = add(firstInp, secondInp)
+    print(f'SUM: {num1+num2}=>', ':', addition[::-1])
+    mul = multiplier(firstInp, secondInp)
+    print(f'MUL: {num1*num2}=>', mul[::-1])
 
 

@@ -159,5 +159,3 @@ while True:
     print(f'SUM: {num1+num2}=>', ':', addition[::-1])
     mul = multiplier(firstInp, secondInp)
     print(f'MUL: {num1*num2}=>', mul[::-1])
-
-

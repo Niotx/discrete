@@ -1,51 +1,33 @@
-def affine_encrypt(sentence, a, b):
-    encrypted = ""
-
-    for char in sentence:
-        if char.isalpha():
-            if char.isupper():
-                encrypted += chr((a * (ord(char) - ord('A')) + b) % 26 + ord('A'))
-            else:
-                encrypted += chr((a * (ord(char) - ord('a')) + b) % 26 + ord('a'))
-        else:
-            encrypted += char
-
-    return encrypted
+def mod_inverse(a, m):
+    for x in range(1, m):
+        if (a * x) % m == 1:
+            return x
+    return 1
 
 
-def affine_decrypt(encrypted_sentence, a, b):
-    decrypted = ""
+def chinese_equations(mods, nums, n):
+    multipl_mod = 1
+    for i in range(n):
+        multipl_mod *= mods[i]
 
-    a_inverse = next((j for j in range(26) if (a * j) % 26 == 1), 0)
-
-    for char in encrypted_sentence:
-        if char.isalpha():
-            if char.isupper():
-                decrypted += chr(((ord(char) - ord('A') - b) * a_inverse) % 26 + ord('A'))
-            else:
-                decrypted += chr(((ord(char) - ord('a') - b) * a_inverse) % 26 + ord('a'))
-        else:
-            decrypted += char
-
-    return decrypted
+    result = 0
+    for j in range(n):
+        M_k = multipl_mod // mods[j]
+        result += nums[j] * mod_inverse(M_k, mods[j]) * M_k
+    return result % multipl_mod
 
 
 def main():
-    sentence = input("Enter a sentence: ")
-    operation = input("What do you want (Encrypt/Decrypt): ").capitalize()
-
-    a = int(input("Enter the value of a: "))
-    b = int(input("Enter the value of b: "))
-
-    if operation == "Encrypt":
-        result = affine_encrypt(sentence, a, b)
-        print("Encrypted sentence:", result)
-    elif operation == "Decrypt":
-        result = affine_decrypt(sentence, a, b)
-        print("Decrypted sentence:", result)
-    else:
-        print("Error: Invalid operation.")
+    n = int(input("Enter the number of equations: "))
+    mods = []
+    nums = []
+    for i in range(n):
+        mods.append(int(input(f"mod {i + 1}: ")))
+        nums.append(int(input(f"a {i + 1}: ")))
+    result = chinese_equations(mods, nums, n)
+    print("answer:", result)
 
 
 if __name__ == "__main__":
-    main()
+    while True:
+        main()

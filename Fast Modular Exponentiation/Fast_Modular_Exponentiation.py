@@ -1,13 +1,13 @@
 def fast_modular_exponentiation(a, b, m):
-    result = 1
+    re = 1
     a = a % m
     while b > 0:
         if b % 2 == 1:
-            result = (result * a) % m
+            re = (re * a) % m
         a = (a * a) % m
         b //= 2
 
-    return result
+    return re
 
 
 while True:
